@@ -1,21 +1,27 @@
-package Pages;
+package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class ProductDetailsPage extends Header{
+public class ProductDetails extends Header {
     private WebDriver driver;
-    public ProductDetailsPage(WebDriver driver){
+    @FindBys(@FindBy(className = "list-group-item"))
+    public List<WebElement> similarItems;
+
+    public ProductDetails(WebDriver driver) {
         super(driver);
-        this.driver=driver;
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
-    public void selectSimilarItems(String itemName){
-        List<WebElement> similarItemList= driver.findElements(By.className("list-group-item"));
-        for(WebElement sItem: similarItemList){
-            if(sItem.getText().equalsIgnoreCase(itemName)){
+
+    public void selectSimilarItems(String itemName) {
+        for (WebElement sItem : similarItems) {
+            if (sItem.getText().equalsIgnoreCase(itemName)) {
                 sItem.click();
             }
         }

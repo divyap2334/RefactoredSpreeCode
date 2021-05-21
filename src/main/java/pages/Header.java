@@ -1,25 +1,45 @@
-package Pages;
+package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class Header {
+public class Header extends pages.BasePage {
     private WebDriver driver;
-    public Header(WebDriver driver){
-        this.driver=driver;
+    @FindBy(id = "link-to-login")
+    private WebElement loginButton;
+    @FindBy(xpath = "//*[@id=\"content\"]/div[1]")
+    private WebElement loginMsg;
+    @FindBy(linkText = "Logout")
+    private WebElement logoutButton;
+    @FindBy(css = ".alert")
+    private WebElement logoutMsg;
+
+
+    public Header(WebDriver driver) {
+        super(driver);
+        this.driver = driver;
     }
-    public void clickLoginButton(){
-        driver.findElement(By.id("link-to-login")).click();
+
+    public void clickLoginButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+        loginButton.click();
     }
-    public String getLoginMessage(){
-        String actualMessage = driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]")).getText();
-        return actualMessage;
+
+    public String getLoginMessage() {
+        wait.until(ExpectedConditions.visibilityOf(loginMsg));
+        return (loginMsg.getText());
     }
-    public  void clickLogoutButton(){
-        driver.findElement(By.linkText("Logout")).click();
+
+    public void clickLogoutButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(logoutButton));
+        logoutButton.click();
     }
-    public String getLogOutMessage(){
-        String logoutMessage=driver.findElement(By.cssSelector(".alert.alert-notice")).getText();
-        return logoutMessage;
+
+    public String getLogOutMessage() {
+        wait.until(ExpectedConditions.visibilityOf(logoutMsg));
+        return (logoutMsg.getText());
+
     }
 }
