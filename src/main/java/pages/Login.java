@@ -9,11 +9,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class Login extends Header {
     public WebDriver driver;
     @FindBy(id = "spree_user_email")
-    private WebElement userName;
+    private WebElement emailID;
     @FindBy(id = "spree_user_password")
     private WebElement passWord;
     @FindBy(name = "commit")
-    private WebElement submitButton;
+    private WebElement submit;
 
 
     public Login(WebDriver driver) {
@@ -23,21 +23,11 @@ public class Login extends Header {
     }
 
     public void as(String emailId, String password) {
-        wait.until(ExpectedConditions.visibilityOf(userName));
-        userName.sendKeys(emailId);
+        wait.until(ExpectedConditions.visibilityOf(emailID));
+        emailID.sendKeys(emailId);
         passWord.sendKeys(password);
-        submitButton.click();
+        submit.click();
     }
 
-    public void clickOnRememberMe() {
 
-    }
-
-    public void createAccount() {
-
-    }
-
-    public void forgotPassword() {
-
-    }
 }

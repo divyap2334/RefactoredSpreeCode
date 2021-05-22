@@ -19,10 +19,10 @@ public class ProductDetails extends Header {
         PageFactory.initElements(driver, this);
     }
 
-    public void selectSimilarItems(String itemName) {
-        for (WebElement sItem : similarItems) {
-            if (sItem.getText().equalsIgnoreCase(itemName)) {
-                sItem.click();
+    public void selectSimilarItem(String itemName) {
+        for (WebElement selectedItem : similarItems) {
+            if (selectedItem.getText().equalsIgnoreCase(itemName)) {
+                selectedItem.click();
             }
         }
     }
